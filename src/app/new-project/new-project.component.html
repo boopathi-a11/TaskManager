@@ -1,0 +1,69 @@
+<form (ngSubmit)="AddProject(taskForm)" #taskForm="ngForm" autocomplete="off">
+<div class="container">
+  <br>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Project:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="txtTaskName" placeholder="Project Name" name="Project_Name"  [(ngModel)]="model.Project_Name"  #Project_Name="ngModel" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Priority:</label>
+      <div class="col-sm-4">
+        <input type="range" class="form-control" id="rngPripority" min="0" max="30" name="Project_Priority"  [(ngModel)]="model.Project_Priority"  #Project_Priority="ngModel" required>
+      </div>
+    </div>    
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Start Date:</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="txtStartDate" name="Start_date"  [(ngModel)]="model.Start_date"  #Start_date="ngModel" required >
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">End Date:</label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="txtEndDate" name="End_Date"  [(ngModel)]="model.End_Date"  #End_Date="ngModel" required>
+      </div>
+    </div>
+    
+
+<div class="container-fluid">
+<div class="form-group row">
+  <label class="col-sm-2 col-form-label"></label>
+  <div class="col-sm-2">
+    <input id="btnAddTask" type="submit" value="{{Buttonname}}" [disabled]="!taskForm.form.valid" >
+  </div>
+  <div class="col-sm-2">
+    <input id="btnReset" type="reset" value="Reset" (click)="Reset()" >
+  </div>
+</div>
+</div>
+</div><br>
+<div class="container">
+  <label class="col-sm-2 col-form-label"><strong>Sort by:</strong></label>
+  <input type="button" value="Start Date" (click)=SortSDate()>&nbsp;&nbsp;
+  <input type="button" value="End Date" (click)=SortEDate()>&nbsp;&nbsp;
+  <input type="button" value="Priority" (click)=SortPriority()>&nbsp;&nbsp;
+</div><br>
+
+<div class="container">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>        
+      <th>Project Name</th>
+      <th>Priority</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tas of service.list1 "> 
+      <td>{{tas.Project_Name}}</td>
+      <td>{{tas.Project_Priority}}</td>
+      <td>{{tas.Start_date | date:'dd/MM/yyyy'}}</td>
+      <td>{{tas.End_date | date:'dd/MM/yyyy'}}</td>
+      <td><input type="button" id="btnEditUser" value="Edit" (click)=UpdateProject(tas)>&nbsp;&nbsp;<input type="button" id="btnDeleteUser" value="Suspend" (click)=DeleteProject(tas.Project_ID)></td>      
+    </tr>
+  </tbody>
+  </table>
+</div>
+</form>

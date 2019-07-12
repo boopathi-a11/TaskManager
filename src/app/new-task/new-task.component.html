@@ -1,0 +1,119 @@
+<form  (ngSubmit)="AddTask(taskForm)" #taskForm="ngForm" autocomplete="off">
+  <div class="container">
+    <!-- <h1>Task Manager</h1> -->
+    <a class="anchorcur" (click)="addTask()">Add Task</a>&nbsp;&nbsp;
+    <a class="anchorcur" (click)="viewTask()">View Task</a>
+    <div>&nbsp;</div>
+  </div> 
+    <div *ngIf="isAdd" class="container"><br>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Task:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtTaskName" placeholder="Task Name" name="Task_Name"  [(ngModel)]="model.Task_Name"  #Task_Name="ngModel" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Priority:</label>
+        <div class="col-sm-4">
+          <input type="range" class="form-control" id="rngPripority" min="0" max="30" name="Task_Priority"  [(ngModel)]="model.Task_Priority"  #Task_Priority="ngModel" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Parent Task:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtParentTaskName" placeholder="Parent Task Name" name="Parent_Task_Name"  [(ngModel)]="model.Parent_Task_Name"  #Parent_Task_Name="ngModel" required>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Start Date:</label>
+        <div class="col-sm-4">
+          <input type="date" class="form-control" id="txtStartDate" name="Start_date"  [(ngModel)]="model.Start_date"  #Start_date="ngModel" required >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">End Date:</label>
+        <div class="col-sm-4">
+          <input type="date" class="form-control" id="txtEndDate" name="End_Date"  [(ngModel)]="model.End_Date"  #End_Date="ngModel" required>
+        </div>
+      </div>
+      
+  
+  <div class="container-fluid">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-2">
+      <input id="btnAddTask" type="submit" value="{{Buttonname}}" [disabled]="!taskForm.form.valid" >
+    </div>
+    <div class="col-sm-2">
+      <input id="btnReset" type="reset" value="Reset" (click)="Reset()" >
+    </div>
+  </div>
+</div>
+</div>  
+<div class="container" *ngIf="isView">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Task:</label>
+        <div class="col-sm-4">
+            <!-- [(ngModel)]="searchTaskName" -->
+          <input type="text" class="form-control" id="txtTaskName1" [(ngModel)]="TaskName1" name="searchTaskName">
+        </div>
+        <label class="col-sm-2 col-form-label">Parent Task:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtParentTaskName1" [(ngModel)]="PTaskName1" name="searchPTaskName">
+        </div>
+      </div>
+      <div class="form-group row">
+          <label class="col-sm-2 col-form-label">Priority From:</label>
+          <div class="col-sm-4">
+              <input type="text" class="form-control" id="txtpriorityFrom" [(ngModel)]="priorityFrom" name="searchpriorityFrom">
+            </div>
+            <label class="col-sm-2 col-form-label">Priority To:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="txtpriorityTo" [(ngModel)]="priorityTo" name="searchpriorityTo">
+              </div>
+      </div>
+      <div class="form-group row">          
+              <label class="col-sm-2 col-form-label">Start Date:</label>
+              <div class="col-sm-4">
+                  <input type="date" class="form-control" id="txtStartDate1" [(ngModel)]="StartDate1" name="searchStartDate">
+                </div>
+                <label class="col-sm-2 col-form-label">End Date:</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="txtEndDate1" [(ngModel)]="EndDate1" name="searchEndDate">
+                  </div>
+      </div>
+      <div class="form-group row">
+          <label class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-1">
+            <input id="btnSearch" type="button" value="Search" (click)="Search(taskForm)" >
+          </div>
+          <div class="col-sm-1">
+            <input id="btnClear" type="button" value="Clear" (click)="Clear()" >
+          </div>
+        </div>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <th>Task Name</th>
+      <th>Parent Task Name</th>
+      <th>Priority</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Action</th>
+    </thead>
+    <tbody>
+        <!-- | grdFilter: {Task_Name: searchTaskName}; -->
+    <tr *ngFor="let tas of service.list "> 
+      <td>{{tas.Task_Name}}</td>
+      <td>{{tas.Parent_Task_Name}}</td>
+      <td>{{tas.Task_Priority}}</td>
+      <td>{{tas.Start_date | date:'dd/MM/yyyy'}}</td>
+      <td>{{tas.End_Date | date:'dd/MM/yyyy'}}</td>
+      <td><input type="button" id="btnEditTask" value="Edit" (click)=UpdateTask(tas)>&nbsp;&nbsp;<input type="button" id="btnEndTask" value="End Task" (click)=EndTask(tas.Task_ID)></td>      
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+
+
+</form>

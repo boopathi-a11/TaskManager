@@ -1,0 +1,59 @@
+<form (ngSubmit)="AddUser(taskForm)" #taskForm="ngForm" autocomplete="off">
+  <div class="container">
+    <br>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">First Name:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtFirstName" placeholder="First Name" name="First_Name"  [(ngModel)]="model.First_Name"  #First_Name="ngModel" required>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Last Name:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtLastName" placeholder="Last Name" name="Last_Name"  [(ngModel)]="model.Last_Name"  #First_Name="ngModel" required>
+        </div>
+      </div> 
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Employee ID:</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtEmployeeID" placeholder="Employee ID" name="Employee_ID"  [(ngModel)]="model.Employee_ID"  #Employee_ID="ngModel" required>
+        </div>
+      </div>      
+  
+  <div class="container-fluid">
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-2">
+      <input id="btnAddTask" type="submit" value="{{Buttonname}}" [disabled]="!taskForm.form.valid" >
+    </div>
+    <div class="col-sm-2">
+      <input id="btnReset" type="reset" value="Reset" (click)="Reset()" >
+    </div>
+  </div>
+  </div><br>
+  <div class="container">
+    <label class="col-sm-2 col-form-label"><strong>Sort by:</strong></label>
+    <input type="button" value="First Name" (click)=SortFUser()>&nbsp;&nbsp;
+    <input type="button" value="Last Name" (click)=SortLUser()>&nbsp;&nbsp;
+    <input type="button" value="Employee ID" (click)=SortUser()>&nbsp;&nbsp;
+  </div><br>
+  </div>
+  <div class="container">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>        
+        <th>Employee ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tas of service.list2 "> 
+        <td>{{tas.Employee_ID}}</td>
+        <td>{{tas.First_Name}}</td>
+        <td>{{tas.Last_Name}}</td>
+        <td><input type="button" id="btnEditUser" value="Edit" (click)=UpdateUser(tas)>&nbsp;&nbsp;<input type="button" id="btnDeleteUser" value="Delete" (click)=DeleteUser(tas.User_ID)></td>      
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</form>
