@@ -7,6 +7,17 @@
   </div> 
     <div *ngIf="isAdd" class="container"><br>
       <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Project:</label>
+        <div class="col-sm-4">
+          <!-- <input type="text" class="form-control" id="txtTaskName" placeholder="Task Name" name="Task_Name"  [(ngModel)]="model.Task_Name"  #Task_Name="ngModel" required> -->
+          <select class="form-control" name="Project_ID"  [(ngModel)]="model.Project_ID"  #Project_ID="ngModel" required>
+            <option *ngFor="let pro of service.list1" [value]="pro.Project_ID">
+              {{pro.Project_Name}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
         <label class="col-sm-2 col-form-label">Task:</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="txtTaskName" placeholder="Task Name" name="Task_Name"  [(ngModel)]="model.Task_Name"  #Task_Name="ngModel" required>
@@ -36,7 +47,18 @@
           <input type="date" class="form-control" id="txtEndDate" name="End_Date"  [(ngModel)]="model.End_Date"  #End_Date="ngModel" required>
         </div>
       </div>
-      
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">User:</label>
+        <div class="col-sm-4">
+          <!-- <input type="text" class="form-control" id="txtTaskName" placeholder="Task Name" name="Task_Name"  [(ngModel)]="model.Task_Name"  #Task_Name="ngModel" required> -->
+          <select class="form-control" name="User_ID"  [(ngModel)]="model.User_ID"  #User_ID="ngModel" required>
+            <option *ngFor="let usr of service.list2" [value]="usr.User_ID">
+              <!-- {{usr.Employee_ID}} -->
+              {{usr.First_Name +" " + usr.Last_Name + " ("+ usr.Employee_ID +")"}}
+            </option>
+          </select>
+        </div>
+      </div>
   
   <div class="container-fluid">
   <div class="form-group row">
@@ -90,7 +112,13 @@
           <div class="col-sm-1">
             <input id="btnClear" type="button" value="Clear" (click)="Clear()" >
           </div>
-        </div>
+        </div><br>
+        <div class="container">
+          <label class="col-sm-2 col-form-label"><strong>Sort by:</strong></label>
+          <input type="button" value="Start Date" (click)=SortSDate()>&nbsp;&nbsp;
+          <input type="button" value="End Date" (click)=SortEDate()>&nbsp;&nbsp;
+          <input type="button" value="Priority" (click)=SortPriority()>&nbsp;&nbsp;
+        </div><br>
   <table class="table table-hover table-bordered table-striped">
     <thead>
       <th>Task Name</th>
@@ -113,7 +141,4 @@
   </tbody>
   </table>
 </div>
-
-
-
 </form>

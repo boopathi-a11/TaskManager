@@ -24,13 +24,14 @@ export class NewTaskComponent implements OnInit {
   public priorityTo?:number;
   public StartDate1:Date;
   public EndDate1:Date;
-
   ngOnInit() {
     this.model.Task_Priority=0;
     // this.service.getlist().subscribe(e => {
     //   this.SearchList = e;
     // })
     this.service.getlist();
+    this.service.GetProjectList();
+    this.service.GetUsersList();
   }
   
   Reset(TaskName:NgForm): void{   
@@ -79,6 +80,8 @@ this.isAdd = !this.isAdd;
    this.model.Start_date= tas.Start_date;
    this.model.End_Date=tas.End_Date;
    this.model.ISTaskEnded="N";
+   this.model.User_ID=tas.User_ID;
+   this.model.Project_ID=tas.Project_ID;
    this.addTask();  
    this.Buttonname="Update Task";
   }
@@ -106,5 +109,17 @@ this.isAdd = !this.isAdd;
    this.StartDate1=null;
    this.EndDate1=null;
    this.service.getlist();
+  }
+
+  SortSDate(){
+    this.service.getlist1("SD");
+  }
+
+  SortEDate(){
+    this.service.getlist1("ED");
+  }
+
+  SortPriority(){
+    this.service.getlist1("P");
   }
 }

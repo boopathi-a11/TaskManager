@@ -13,12 +13,9 @@ export class NewUsersComponent implements OnInit {
   constructor(private service:TaskService) { }
   public model = new Users();
   public Buttonname:string="Add User";
-  public SFN:string="FN";
-  public SLN:string="LN";
-  public SID:string="ID";
 
   ngOnInit() {
-    this.service.GetUsersList();
+    this.service.GetUsersList(); 
   }
 
   AddUser(formData:NgForm){

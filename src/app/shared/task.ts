@@ -6,6 +6,8 @@ export class Task {
   End_Date  :Date;
   Task_Priority :number;
   ISTaskEnded :string;
+  User_ID:number;
+  Project_ID:number;
 }
 
 export class Project {
