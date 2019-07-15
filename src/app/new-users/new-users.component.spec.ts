@@ -26,7 +26,7 @@ describe('NewUsersComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should creates', () => {
     expect(component).toBeTruthy();
   });
 });
